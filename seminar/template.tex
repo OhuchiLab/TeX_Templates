@@ -1,0 +1,157 @@
+% Version: 20241221
+
+% プリアンブル (TeX ドキュメントの設定)=====
+
+% ドキュメントクラスの設定: 左寄せ, A4用紙, 2段組
+\documentclass[fleqn, a4paper, twocolumn]{jsarticle}
+
+% パッケージの読み込み
+\usepackage[dvipsnames]{xcolor}   % 様々な色を使えるようにするパッケージ
+\usepackage[dvipdfmx]{graphicx}   % 図とかを入れられるようにするパッケージ
+\usepackage{ascmac}               % 枠やボックスを作成するためのパッケージ
+\usepackage{multicol} % 複数カラムのレイアウトをサポート
+\usepackage{physics, amssymb, amsmath} % 数式や物理表現をサポートするパッケージ群
+% physics: 物理記号（例: 内積、偏微分）
+% amssymb: 数学記号（例: 集合、特殊な矢印）
+% amsmath: 高度な数式表現（例: 行列、分数）
+\usepackage{enumitem} % 箇条書きやリストのカスタマイズ
+\usepackage{titlesec} % 見出しのデザイン変更
+\usepackage{titling} % タイトルのカスタマイズ
+\usepackage{here} % 図表の強制的な配置制御（[H]オプションを使用可能）
+\usepackage{subcaption} % 図の中で複数の小図（サブキャプション）を管理
+\usepackage{fancyhdr} % ヘッダー・フッターのカスタマイズ
+
+% TikZの設定 ---
+\usepackage{tikz, braket} % TikZ: 図やグラフの作成
+% braket: 量子力学のブラケット記法をサポート
+\usetikzlibrary{patterns, intersections, calc, quotes, angles, arrows.meta, through, shapes.geometric} 
+% patterns: 塗りつぶしパターン
+% intersections: 線の交点計算
+% calc: 座標計算
+% quotes: 図中の角度や距離の注記
+% angles: 角度の描画
+% arrows.meta: 矢印のスタイル拡張
+% through: 特定点を通る形状の描画
+% shapes.geometric: 基本的な幾何図形の描画
+\usetikzlibrary{shapes, positioning} 
+% shapes: さらに多様な図形を描画
+% positioning: 図形間の位置関係を制御
+% ---
+
+% 余白の設定 ---
+\setlength{\mathindent}{3zw} % 数式のインデントを設定
+\setlength{\topmargin} {0cm} % 上マージンをゼロに
+\iftombow
+    \addtolength{\topmargin}{0cm} % トンボ付きの場合の調整
+\else
+    \addtolength{\topmargin}{-1truein} % トンボなしの場合の調整
+\fi
+\setlength{\textheight}   {45\baselineskip} % テキストの高さ（行基準）
+\addtolength{\textheight} {\topskip} % 行の余白分を追加
+\setlength{\oddsidemargin}{-15pt} % 偶数ページの余白
+\setlength{\textwidth}    {50zw} % テキストの幅（文字単位）
+% ---
+
+% ページスタイルの設定 ---
+\pagestyle{empty} % ヘッダー・フッターを非表示
+\lhead{} % 左ヘッダー空白
+\chead{} % 中央ヘッダー空白
+\lfoot{} % 左フッター空白
+\cfoot{--\;\thepage\;--} % ページ番号を中央に表示
+\rfoot{} % 右フッター空白
+\allowdisplaybreaks % 数式がページをまたぐことを許可
+% ---
+
+% 図番号などの設定 ---
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+
+\newcommand{\erfc}{\mathrm{erfc}}
+% ---
+
+% 資料のタイトルを入れる
+\title{}
+% 資料の著者名を入れる
+\date{}
+% ゼミの日を入れる
+\author{}
+
+% =====
+
+\begin{document}
+
+% タイトル部分 (操作不要)---
+\noindent{\textgt{\Large \thetitle}}\\  % 資料のタイトル
+\noindent \theauthor \hfill             % 資料の著者名
+\thedate                                % ゼミの日
+% ---
+
+\section{前回ゼミまでの進捗状況}
+前回のゼミ資料を内容をまとめる．
+
+\subsection{前回ゼミでの指摘事項}
+前回のゼミで指摘された事項を書く．
+箇条書きの場合は以下のようにする．
+\begin{itemize}
+	\item 現象について定量的な説明をすべき
+	\item 理論値を示せ
+\end{itemize}
+
+\subsection{前回資料の補足・訂正など}
+前回のゼミ資料の誤記などがあれば訂正する．なければこのsubsectionは削除．
+
+\section{導入と基礎知識，原理など}
+今回の報告内容で，基礎理論等説明したほうが良い場合は
+ここに書く．
+
+\subsection{箇条書きの例}
+見やすさのため，ある程度内容が多ければこのようにsubsectionに分けたほうが良い．
+フローなどを説明する際に，番号付きの箇条書きをしたい場合は以下のように記述できる．
+\begin{enumerate}
+	\item 一次変調
+	\item IFFT
+	\item Cyclic Prefix付加
+\end{enumerate}
+または箇条書きのようにして用語を説明する場合，以下のように記述できる．
+\begin{discription}
+	\item [QAM]: Quadrature Amplitude Modulation
+	\item [PSK]: Phase Shift Keying
+\end{discription}
+
+\subsection{数式の例}
+数式の例 (1行で済む場合)
+\begin{equation}
+	\exp \qty[\mathrm{j}2\pi ft] = \cos \qty(2\pi ft) + \mathrm{j}\sin \qty(2\pi ft)
+	\label{eq: euler}
+\end{equation}
+
+数式の例 (1行ではおさまらない場合)
+\begin{equation}
+	\begin{split}
+		\cos 2\theta & = \cos^2\theta-\sin^2\theta \\ % &は位置を合わせるための記号
+		             & = 2\cos^2\theta - 1         \\         % &の後ろの文字で位置が合うので，基本的には
+		             & = 1 - 2\sin^2\theta         % イコールで合わせると良い．
+		\label{eq: doubleangle}
+	\end{split}
+\end{equation}
+
+数式の例 (複数の式を列挙したい場合)
+\begin{align}
+	\sin (\alpha + \beta) & = \cos \alpha \sin \beta + \sin \alpha \cos \beta \\
+	\sin (\alpha - \beta) & - \cos \alpha \sin \beta - \sin \alpha \cos \beta
+\end{align}
+
+\section{今週の作業内容}
+今週行った作業内容を書く．
+\subsection{作業1}
+これも基礎理論と同様，わかりやすくsubsectionに分けてあげるべきである．
+
+\section{今後の課題}
+今後の課題を書く．次の週にまず取り組むことを書くと良い．
+
+% 参考文献
+\bibliographystyle{ohuchi} % 大内研究室用のスタイルファイル
+\bibliography{ref}        % 参考文献のファイル名 (デフォルトはref.bibに設定してあるけど，変えても良い)
+
+\end{document}
