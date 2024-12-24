@@ -71,11 +71,11 @@
 % ---
 
 % 資料のタイトルを入れる
-\title{}
+\title{ゼミ用テンプレート}
 % 資料の著者名を入れる
-\date{}
+\date{2025年04月01日}
 % ゼミの日を入れる
-\author{}
+\author{名字 名前}
 
 % =====
 
@@ -114,10 +114,10 @@
 	\item Cyclic Prefix付加
 \end{enumerate}
 または箇条書きのようにして用語を説明する場合，以下のように記述できる．
-\begin{discription}
+\begin{description}
 	\item [QAM]: Quadrature Amplitude Modulation
 	\item [PSK]: Phase Shift Keying
-\end{discription}
+\end{description}
 
 \subsection{数式の例}
 数式の例 (1行で済む場合)
@@ -139,13 +139,22 @@
 数式の例 (複数の式を列挙したい場合)
 \begin{align}
 	\sin (\alpha + \beta) & = \cos \alpha \sin \beta + \sin \alpha \cos \beta \\
-	\sin (\alpha - \beta) & - \cos \alpha \sin \beta - \sin \alpha \cos \beta
+	\sin (\alpha - \beta) & = \cos \alpha \sin \beta - \sin \alpha \cos \beta
 \end{align}
 
 \section{今週の作業内容}
 今週行った作業内容を書く．
 \subsection{作業1}
 これも基礎理論と同様，わかりやすくsubsectionに分けてあげるべきである．
+
+\subsection{参考文献の挿入}
+参考文献は，\texttt{ref.bib}に書いておく．
+参考文献を挿入する場合は，\texttt{cite}コマンドを使う．
+例えば，
+
+参考文献\cite{ohuchi2019}は光無線OFDMに関する解説論文である．
+
+のように表示されるようになる．
 
 \section{今後の課題}
 今後の課題を書く．次の週にまず取り組むことを書くと良い．
