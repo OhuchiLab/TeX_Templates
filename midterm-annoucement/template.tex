@@ -1,0 +1,90 @@
+% Version: 20241221
+
+% プリアンブル (TeX ドキュメントの設定)=====
+
+% ドキュメントクラスの設定: 左寄せ, A4用紙, 2段組
+\documentclass[fleqn, a4paper, twocolumn]{jsarticle}
+
+% パッケージの読み込み
+\usepackage[dvipsnames]{xcolor}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{ascmac}
+\usepackage{multicol}
+\usepackage{physics, amssymb, amsmath}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{here}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+
+% TikZの設定 ---
+\usepackage{tikz, braket}
+\usetikzlibrary{patterns, intersections, calc, quotes, angles, arrows.meta, through, shapes.geometric}
+\usetikzlibrary{shapes, positioning}
+
+% 余白の設定 ---
+\setlength{\mathindent}{3zw}
+\setlength{\topmargin} {0cm}
+\iftombow
+    \addtolength{\topmargin}{0cm}
+\else
+    \addtolength{\topmargin}{-1truein}
+\fi
+\setlength{\textheight}   {45\baselineskip}
+\addtolength{\textheight} {\topskip}
+\setlength{\oddsidemargin}{-15pt}
+\setlength{\textwidth}    {50zw}
+
+% ページスタイルの設定 ---
+\pagestyle{empty}
+\lhead{}
+\chead{}
+\lfoot{}
+\cfoot{--\;\thepage\;--}
+\rfoot{}
+\allowdisplaybreaks
+
+% 図番号などの設定 ---
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\numberwithin{equation}{section}
+\newcommand{\erfc}{\mathrm{erfc}}
+
+% 資料のタイトルを入れる
+\title{中間発表の題目}
+% 資料の著者名を入れる
+\date{夏季/冬季合同中間発表 2025年4月1日}
+% ゼミの日を入れる
+\author{名字 名前}
+
+% =====
+
+\begin{document}
+
+% タイトル部分 (操作不要) =====
+\twocolumn[
+	\centering
+	\noindent
+	\textsf{\Large \thetitle\\}
+	\thedate\\
+	\theauthor (大内研究室)\\
+]
+% =====
+
+% 本文 (ここから内容を記述)=====
+% こういった長い文章は，別ファイルに記述して，\input{}で読み込むと良い．
+% 読み込むときは，拡張子はいらない．ただ，章ごとに分けてもちゃんと
+% ファイル名は.texと末尾につけてtexファイルであることを明示すること．
+\input{01_introduction}
+\input{02_fundamental_theory}
+\input{03_research}
+\input{04_summary}
+\input{05_prospects}
+% (ここまで)=====
+
+% 参考文献
+\bibliographystyle{ohuchi}  % 大内研究室用のスタイルファイル
+\bibliography{ref}          % 参考文献のファイル名 (デフォルトはref.bibに設定してあるけど，変えても良い)
+
+\end{document}
