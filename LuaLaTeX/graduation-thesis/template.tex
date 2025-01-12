@@ -1,0 +1,143 @@
+% Version: 20241221
+
+% プリアンブル (TeX ドキュメントの設定)=====
+
+% ドキュメントクラスの設定: 左寄せ, A4用紙, タイトルページ有り, 11pt
+\documentclass[fleqn, a4paper, titlepage, 11pt]{ltjsarticle}
+
+% パッケージの読み込み
+\usepackage[x-1a]{pdfx} % PDF/X-1a 形式のPDFを生成
+\usepackage[dvipsnames]{xcolor}   % 様々な色を使えるようにするパッケージ
+\usepackage[luatex]{graphicx}   % 図とかを入れられるようにするパッケージ
+\usepackage{ascmac}               % 枠やボックスを作成するためのパッケージ
+\usepackage{CJKutf8}              % 日本語を使えるようにするパッケージ
+\usepackage{luatex85}            % LuaTeX 0.85 以前のバージョンとの互換性を持たせるパッケージ
+\usepackage{multicol} % 複数カラムのレイアウトをサポート
+\usepackage{physics, amssymb, amsmath} % 数式や物理表現をサポートするパッケージ群
+% physics: 物理記号（例: 内積、偏微分）
+% amssymb: 数学記号（例: 集合、特殊な矢印）
+% amsmath: 高度な数式表現（例: 行列、分数）
+\usepackage{enumitem} % 箇条書きやリストのカスタマイズ
+\usepackage{titlesec} % 見出しのデザイン変更
+\usepackage{titling} % タイトルのカスタマイズ
+\usepackage{here} % 図表の強制的な配置制御（[H]オプションを使用可能）
+\usepackage{subcaption} % 図の中で複数の小図（サブキャプション）を管理
+\usepackage{fancyhdr} % ヘッダー・フッターのカスタマイズ
+\usepackage[deluxe]{luatexja-preset} % LuaTeX-ja の設定
+
+% TikZの設定 ---
+\usepackage{tikz, braket} % TikZ: 図やグラフの作成
+% braket: 量子力学のブラケット記法をサポート
+\usetikzlibrary{patterns, intersections, calc, quotes, angles, arrows.meta, through, shapes.geometric} 
+% patterns: 塗りつぶしパターン
+% intersections: 線の交点計算
+% calc: 座標計算
+% quotes: 図中の角度や距離の注記
+% angles: 角度の描画
+% arrows.meta: 矢印のスタイル拡張
+% through: 特定点を通る形状の描画
+% shapes.geometric: 基本的な幾何図形の描画
+\usetikzlibrary{shapes, positioning} 
+% shapes: さらに多様な図形を描画
+% positioning: 図形間の位置関係を制御
+% ---
+
+% 余白の設定 ---
+\setlength{\mathindent}{3zw} % 数式のインデントを設定
+\setlength{\topmargin} {0cm} % 上マージンをゼロに
+\iftombow
+    \addtolength{\topmargin}{0cm} % トンボ付きの場合の調整
+\else
+    \addtolength{\topmargin}{-1truein} % トンボなしの場合の調整
+\fi
+\setlength{\textheight}   {45\baselineskip} % テキストの高さ（行基準）
+\addtolength{\textheight} {\topskip} % 行の余白分を追加
+\setlength{\oddsidemargin}{-15pt} % 偶数ページの余白
+\setlength{\textwidth}    {50zw} % テキストの幅（文字単位）
+% ---
+
+% ページスタイルの設定 ---
+\pagestyle{plain} % ヘッダー・フッターを非表示
+\lhead{} % 左ヘッダー空白
+\chead{} % 中央ヘッダー空白
+\lfoot{} % 左フッター空白
+\cfoot{--\;\thepage\;--} % ページ番号を中央に表示
+\rfoot{} % 右フッター空白
+\allowdisplaybreaks % 数式がページをまたぐことを許可
+% ---
+
+% 図番号などの設定 ---
+\numberwithin{figure}{section}  % 図番号をセクション毎にリセット
+\numberwithin{table}{section}  % 表番号をセクション毎にリセット
+\numberwithin{equation}{section}  % 数式番号をセクション毎にリセット
+
+\setcounter{tocdepth}{3} % 目次の表示レベルをsubsubsectionまでに設定
+
+\newcommand{\erfc}{\mathrm{erfc}}
+\newcommand{\studentnumber}[1]{\def\thestudentnumber{#1}} % 学籍番号を設定するコマンド
+\newcommand{\graduateyear}[1]{\def\thegraduateyear{#1}} % 卒業年度を設定するコマンド
+% ---
+
+% 資料のタイトルを入れる
+\title{卒業論文の題目}
+% 資料の著者名を入れる
+\date{令和7年2月14日}
+% ゼミの日を入れる
+\author{名字 名前}
+% 学籍番号を入れる
+\studentnumber{5**1-****}
+% 卒業年度を入れる
+\graduateyear{令和7年度}
+
+% =====
+
+\begin{document}
+
+% 操作不要部分 (共通の為) =====
+% タイトルページの作成 ---
+\begin{titlepage}
+	\begin{center}
+		\vspace*{3.5cm}
+		{\LARGE \thegraduateyear　卒業論文\\}
+		\vspace{1cm}
+		\textgt{\huge \thetitle\\}
+		\vspace{4cm}
+		{\LARGE
+			静岡大学　工学部　電気電子工学科\\
+			大内研究室\\
+			学籍番号　\thestudentnumber\\
+			\theauthor\\
+			指導教員　大内 浩司 准教授\\
+		}
+		\vspace{2cm}
+		{\LARGE \thedate\\}
+	\end{center}
+\end{titlepage}
+% 白紙ページの作成 ---
+\newpage
+\thispagestyle{empty}
+~\\
+% 目次の作成 ---
+\newpage
+\tableofcontents % 目次の挿入
+\setcounter{page}{1}  % ページ番号のリセット
+\newpage
+% =====
+
+% ここから論文の執筆を始める =====
+\section{参考文献の参照方法}
+\cite{ohuchi2019}は光OFDM通信に関する解説論文である．
+
+% 謝辞 ---
+\newpage
+\section*{謝辞}
+\addcontentsline{toc}{section}{謝辞}
+謝辞を書く場合は、新たに謝辞用に1ページ使って書いてください．
+% ここまで (ここからは操作不要) =====
+
+% 参考文献
+\newpage
+\bibliographystyle{ohuchi} % 大内研究室用のスタイルファイル
+\bibliography{ref}        % 参考文献のファイル名 (デフォルトはref.bibに設定してあるけど，変えても良い)
+
+\end{document}
